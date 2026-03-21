@@ -1,0 +1,714 @@
+/* ============================================================
+   AAHAR-AI — Profile & Personalization Styles
+   ============================================================ */
+
+/* ── Profile Button (in header) ────────────────────────────── */
+.profile-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #1b5e20, #43a047);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(27, 94, 32, 0.35);
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    letter-spacing: 0.3px;
+}
+
+.profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27, 94, 32, 0.5);
+}
+
+.profile-btn .profile-btn-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff5252;
+    border-radius: 50%;
+    margin-left: 6px;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ── Profile Modal Overlay ─────────────────────────────────── */
+.profile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.profile-overlay.visible {
+    opacity: 1;
+}
+
+/* ── Profile Modal ─────────────────────────────────────────── */
+.profile-modal {
+    background: #fff;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.4s ease;
+    overflow: hidden;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(30px) scale(0.97);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Profile Header ────────────────────────────────────────── */
+.profile-header {
+    padding: 24px 28px 18px;
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    color: #fff;
+    position: relative;
+}
+
+.profile-header h2 {
+    margin: 0 0 4px;
+    font-size: 24px;
+}
+
+.profile-subtitle {
+    margin: 0;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+.profile-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-close-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Profile Body ──────────────────────────────────────────── */
+.profile-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+}
+
+.profile-section {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.profile-section h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+    color: #1b5e20;
+}
+
+.section-desc {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.section-desc a {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+/* ── Chip Grid ─────────────────────────────────────────────── */
+.chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.chip {
+    padding: 8px 16px;
+    border: 2px solid #e0e0e0;
+    background: #fafafa;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #555;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.chip:hover {
+    border-color: #a5d6a7;
+    background: #f1f8e9;
+}
+
+.chip.active {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-color: #43a047;
+    color: #1b5e20;
+    box-shadow: 0 2px 8px rgba(67, 160, 71, 0.2);
+}
+
+.chip-icon {
+    margin-right: 4px;
+}
+
+/* ── Text Inputs ───────────────────────────────────────────── */
+.profile-text-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fafafa;
+    box-sizing: border-box;
+}
+
+.profile-text-input:focus {
+    outline: none;
+    border-color: #43a047;
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.12);
+    background: #fff;
+}
+
+.profile-text-input-sm {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: #fafafa;
+}
+
+.profile-text-input-sm:focus {
+    outline: none;
+    border-color: #43a047;
+    background: #fff;
+}
+
+/* ── Custom Allergen Row ───────────────────────────────────── */
+.custom-allergen-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.add-custom-btn {
+    padding: 10px 18px;
+    background: #43a047;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+.add-custom-btn:hover {
+    background: #2e7d32;
+}
+
+.custom-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.custom-tag {
+    background: #fff3e0;
+    color: #e65100;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ffcc80;
+}
+
+.custom-tag button {
+    background: none;
+    border: none;
+    color: #e65100;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    line-height: 1;
+}
+
+/* ── Family Members ────────────────────────────────────────── */
+.family-member-card {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    position: relative;
+    border: 1px solid #e0e0e0;
+}
+
+.family-member-card strong {
+    color: #333;
+}
+
+.family-member-card small {
+    color: #777;
+}
+
+.remove-family-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffebee;
+    border: none;
+    color: #ef5350;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-family-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* ── API Key Section ───────────────────────────────────────── */
+.api-key-section {
+    background: #f8faf8;
+    margin: -24px -28px 24px;
+    padding: 20px 28px !important;
+    border-bottom: 2px solid #c8e6c9;
+}
+
+.api-key-input-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.api-key-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+.api-key-input:focus {
+    outline: none;
+    border-color: #43a047;
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.12);
+}
+
+.api-key-toggle {
+    padding: 10px 14px;
+    background: #e8f5e9;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.api-key-toggle:hover {
+    background: #c8e6c9;
+}
+
+.api-key-status {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* ── Scan History Entries ──────────────────────────────────── */
+.history-entry {
+    padding: 12px 14px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    background: #fafafa;
+    transition: background 0.2s;
+}
+
+.history-entry:hover {
+    background: #f0f0f0;
+}
+
+.history-date {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.history-product {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.history-allergens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.history-allergen-badge {
+    background: #ffebee;
+    color: #c62828;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.history-safe-badge {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.empty-history {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+}
+
+.clear-history-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+    font-family: inherit;
+}
+
+.clear-history-btn:hover {
+    background: #ffcdd2;
+}
+
+/* ── Profile Footer ────────────────────────────────────────── */
+.profile-footer {
+    padding: 16px 28px;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.profile-save-btn {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #1b5e20, #43a047);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(27, 94, 32, 0.3);
+    font-family: inherit;
+}
+
+.profile-save-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(27, 94, 32, 0.4);
+}
+
+.profile-cancel-btn {
+    padding: 12px 24px;
+    background: transparent;
+    color: #777;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.profile-cancel-btn:hover {
+    background: #f5f5f5;
+}
+
+/* ── Toast Notification ────────────────────────────────────── */
+.toast-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 14px 28px;
+    background: #1b5e20;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    z-index: 20000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.toast-notification.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ── API Key Banner ────────────────────────────────────────── */
+.api-key-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #fff3e0, #ffe0b2);
+    color: #e65100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+}
+
+.api-key-banner.visible {
+    transform: translateY(0);
+}
+
+.api-key-banner button {
+    padding: 6px 16px;
+    background: #e65100;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.api-key-banner .dismiss-banner {
+    background: transparent;
+    color: #e65100;
+    padding: 4px 8px;
+    font-size: 16px;
+}
+
+/* ── Personalized Summary Highlight ────────────────────────── */
+.personalized-summary {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-left: 4px solid #1565c0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.personalized-summary p {
+    margin: 0;
+    color: #0d47a1;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.personalized-summary .for-you-label {
+    display: inline-block;
+    background: #1565c0;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .profile-modal {
+        max-height: 95vh;
+        border-radius: 14px;
+    }
+
+    .profile-header {
+        padding: 18px 20px 14px;
+    }
+
+    .profile-body {
+        padding: 18px 20px;
+    }
+
+    .api-key-section {
+        margin: -18px -20px 20px;
+        padding: 16px 20px !important;
+    }
+
+    .profile-footer {
+        padding: 14px 20px;
+    }
+
+    .add-family-row {
+        flex-direction: column;
+    }
+
+    .chip {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+/* ── Profile Allergy Rows ──────────────────────────────────── */
+.profile-allergy-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 6px;
+}
+
+.profile-allergy-name {
+    font-weight: 600;
+    color: #333;
+    flex: 1;
+}
+
+.profile-severity-badge {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-severity-badge.sev-high {
+    background: #fce4ec;
+    color: #c62828;
+}
+
+.profile-severity-badge.sev-medium {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.profile-severity-badge.sev-low {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.remove-allergy-btn {
+    width: 26px;
+    height: 26px;
+    background: #ffebee;
+    border: none;
+    color: #ef5350;
+    border-radius: 50%;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.remove-allergy-btn:hover {
+    background: #ffcdd2;
+}

@@ -1,0 +1,907 @@
+/* ============================================================
+   AAHAR-AI — Onboarding & Auth Styles
+   Premium YC-backed startup-grade design
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* ── Auth Screen (Full-page overlay) ───────────────────────── */
+.auth-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50000;
+    background: linear-gradient(135deg, #0a0f1c 0%, #0d1b2a 30%, #1b2838 60%, #0f172a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+}
+
+.auth-screen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+    animation: auroraFloat 20s ease-in-out infinite;
+}
+
+@keyframes auroraFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(2%, -2%) rotate(1deg);
+    }
+
+    66% {
+        transform: translate(-1%, 1%) rotate(-0.5deg);
+    }
+}
+
+/* ── Floating Particles ────────────────────────────────────── */
+.auth-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.15);
+    animation: particleFloat 15s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+    width: 6px;
+    height: 6px;
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.particle:nth-child(2) {
+    width: 4px;
+    height: 4px;
+    top: 60%;
+    left: 70%;
+    animation-delay: 3s;
+    animation-duration: 22s;
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.particle:nth-child(3) {
+    width: 8px;
+    height: 8px;
+    top: 30%;
+    left: 80%;
+    animation-delay: 6s;
+    animation-duration: 16s;
+    background: rgba(168, 85, 247, 0.12);
+}
+
+.particle:nth-child(4) {
+    width: 5px;
+    height: 5px;
+    top: 80%;
+    left: 30%;
+    animation-delay: 2s;
+    animation-duration: 20s;
+}
+
+.particle:nth-child(5) {
+    width: 3px;
+    height: 3px;
+    top: 45%;
+    left: 50%;
+    animation-delay: 8s;
+    animation-duration: 25s;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+    }
+
+    25% {
+        transform: translateY(-30px) translateX(20px);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-15px) translateX(-15px);
+        opacity: 0.5;
+    }
+
+    75% {
+        transform: translateY(-40px) translateX(10px);
+        opacity: 0.9;
+    }
+}
+
+/* ── Auth Container ────────────────────────────────────────── */
+.auth-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    padding: 20px;
+}
+
+.auth-card {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 44px 40px;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 25px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    animation: cardAppear 0.6s ease-out;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-logo h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981, #3b82f6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.auth-logo p {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+    margin: 6px 0 0;
+    font-weight: 400;
+}
+
+/* ── Auth Tabs ─────────────────────────────────────────────── */
+.auth-tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 9px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.auth-tab.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+}
+
+.auth-tab:hover:not(.active) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Form Styles ───────────────────────────────────────────── */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+}
+
+.auth-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.35);
+}
+
+.auth-submit:active {
+    transform: translateY(0);
+}
+
+.auth-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+    font-weight: 500;
+}
+
+.auth-error.visible {
+    display: block;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ONBOARDING WIZARD
+   ══════════════════════════════════════════════════════════════ */
+
+.onboarding-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50000;
+    background: linear-gradient(135deg, #0a0f1c 0%, #0d1b2a 30%, #1b2838 60%, #0f172a 100%);
+    display: none;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+}
+
+.onboarding-screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Onboarding Progress Bar ───────────────────────────────── */
+.onboarding-progress {
+    padding: 20px 30px 10px;
+    flex-shrink: 0;
+}
+
+.progress-bar-track {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.progress-step.active {
+    color: #10b981;
+}
+
+.progress-step.done {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.progress-step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.progress-step.active .progress-step-dot {
+    background: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+}
+
+.progress-step.done .progress-step-dot {
+    background: rgba(16, 185, 129, 0.5);
+}
+
+/* ── Onboarding Content ────────────────────────────────────── */
+.onboarding-content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 30px 30px;
+}
+
+.onboarding-step {
+    display: none;
+    width: 100%;
+    max-width: 700px;
+    animation: stepFadeIn 0.4s ease-out;
+}
+
+.onboarding-step.active {
+    display: block;
+}
+
+@keyframes stepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.step-header {
+    margin-bottom: 30px;
+}
+
+.step-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+}
+
+.step-header p {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ── Allergen Severity Selector ────────────────────────────── */
+.allergen-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.allergen-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.allergen-item:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.allergen-item.selected {
+    border-color: rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.06);
+}
+
+.allergen-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.allergen-item-icon {
+    font-size: 24px;
+}
+
+.allergen-item-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.allergen-item-check {
+    margin-left: auto;
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 12px;
+    color: transparent;
+}
+
+.allergen-item.selected .allergen-item-check {
+    background: #10b981;
+    border-color: #10b981;
+    color: #fff;
+}
+
+/* ── Severity Radio Buttons ────────────────────────────────── */
+.severity-selector {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.severity-btn {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.35);
+    font-family: 'Inter', sans-serif;
+}
+
+.severity-btn:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.severity-btn.sev-high.active {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #ef4444;
+}
+
+.severity-btn.sev-medium.active {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.4);
+    color: #f59e0b;
+}
+
+.severity-btn.sev-low.active {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+/* ── Sensitivity Cards ─────────────────────────────────────── */
+.sensitivity-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.sensitivity-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sensitivity-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.sensitivity-card.selected {
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.06);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.sensitivity-card-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.sensitivity-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.sensitivity-card-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.4;
+}
+
+/* ── Onboarding Chip ───────────────────────────────────────── */
+.ob-chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.ob-chip {
+    padding: 9px 18px;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+}
+
+.ob-chip:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.ob-chip.active {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+/* ── Onboarding Input Fields ───────────────────────────────── */
+.ob-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.ob-input:focus {
+    outline: none;
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.08);
+}
+
+.ob-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.ob-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 8px;
+}
+
+.ob-section {
+    margin-bottom: 28px;
+}
+
+.ob-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ── Footer Nav ────────────────────────────────────────────── */
+.onboarding-footer {
+    padding: 16px 30px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.ob-btn-back {
+    padding: 12px 24px;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.ob-btn-back:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.ob-btn-next {
+    padding: 13px 36px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    font-family: 'Inter', sans-serif;
+}
+
+.ob-btn-next:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.ob-btn-skip {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.ob-btn-skip:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── User Navbar ───────────────────────────────────────────── */
+.user-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+    font-family: 'Inter', sans-serif;
+}
+
+.user-navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #10b981;
+}
+
+.user-navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-navbar-avatar {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #10b981, #3b82f6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.user-navbar-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+
+.navbar-btn {
+    padding: 7px 14px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #555;
+    font-family: 'Inter', sans-serif;
+}
+
+.navbar-btn:hover {
+    background: #f5f5f5;
+}
+
+.navbar-btn.danger {
+    color: #ef4444;
+    border-color: #fecaca;
+}
+
+.navbar-btn.danger:hover {
+    background: #fef2f2;
+}
+
+/* ── Custom Allergen Add ───────────────────────────────────── */
+.custom-add-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.custom-add-row input {
+    flex: 1;
+}
+
+.ob-btn-add {
+    padding: 12px 18px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1.5px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.ob-btn-add:hover {
+    background: rgba(16, 185, 129, 0.25);
+}
+
+/* ── Emergency Contact Fields ──────────────────────────────── */
+.emergency-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 30px 24px;
+    }
+
+    .sensitivity-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .allergen-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .onboarding-content {
+        padding: 15px 16px 20px;
+    }
+
+    .onboarding-progress {
+        padding: 14px 16px 8px;
+    }
+
+    .onboarding-footer {
+        padding: 12px 16px 18px;
+    }
+
+    .step-header h2 {
+        font-size: 22px;
+    }
+
+    .emergency-grid {
+        grid-template-columns: 1fr;
+    }
+}
