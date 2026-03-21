@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="AAHAR-AI — AI-based Allergen Assessment, Health Analysis and Recommendation System">
+    <meta name="author" content="AAHAR-AI">
+    <title>AAHAR-AI — AI-based Allergen Assessment, Health Analysis and Recommendation System</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="onboarding.css">
+</head>
+
+<body id="home">
+
+    <!-- ══════════════════════════════════════════════════════════
+     AUTH SCREEN (Login / Register)
+     ══════════════════════════════════════════════════════════ -->
+    <div class="auth-screen" id="auth-screen">
+        <div class="auth-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-logo">
+                    <h1>🛡️ AAHAR-AI</h1>
+                    <p>AI-based Allergen Assessment, Health Analysis and Recommendation System</p>
+                </div>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+                    <button class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
+                </div>
+                <div class="auth-error" id="auth-error"></div>
+                <form class="auth-form active" id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required
+                            autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required
+                            autocomplete="current-password" />
+                    </div>
+                    <button type="submit" class="auth-submit">Sign In →</button>
+                </form>
+                <form class="auth-form" id="register-form" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="reg-name" placeholder="Enter your full name" required
+                            autocomplete="name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="reg-email" placeholder="you@example.com" required
+                            autocomplete="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="reg-password" placeholder="Create a strong password (6+ chars)"
+                            required minlength="6" autocomplete="new-password" />
+                    </div>
+                    <button type="submit" class="auth-submit">Create Account →</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+     ONBOARDING WIZARD
+     ══════════════════════════════════════════════════════════ -->
+    <div class="onboarding-screen" id="onboarding-screen">
+        <div class="onboarding-progress">
+            <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="ob-progress-fill" style="width: 25%"></div>
+            </div>
+            <div class="progress-steps">
+                <span class="progress-step active" data-step="1"><span class="progress-step-dot"></span>
+                    Allergies</span>
+                <span class="progress-step" data-step="2"><span class="progress-step-dot"></span> Sensitivity</span>
+                <span class="progress-step" data-step="3"><span class="progress-step-dot"></span> Medical</span>
+            </div>
+        </div>
+        <div class="onboarding-content">
+            <div class="onboarding-step active" id="ob-step-1">
+                <div class="step-header">
+                    <h2>⚠️ Your Allergen Profile</h2>
+                    <p>Select your allergens and set the severity level for each. This powers the risk scoring engine.
+                    </p>
+                </div>
+                <div class="allergen-selector" id="ob-allergen-selector"></div>
+                <div class="ob-section">
+                    <div class="ob-section-title">➕ Custom Allergens</div>
+                    <div class="custom-add-row">
+                        <input type="text" class="ob-input" id="ob-custom-allergen"
+                            placeholder="Add a custom allergen (e.g., Kiwi, Latex)" style="margin-bottom:0" />
+                        <button class="ob-btn-add" onclick="addOnboardingCustomAllergen()">+ Add</button>
+                    </div>
+                    <div class="ob-chip-grid" id="ob-custom-tags" style="margin-top:10px"></div>
+                </div>
+            </div>
+            <div class="onboarding-step" id="ob-step-2">
+                <div class="step-header">
+                    <h2>🎛️ Sensitivity & Preferences</h2>
+                    <p>Configure how strictly AAHAR-AI should warn you about potential allergens.</p>
+                </div>
+                <div class="ob-section">
+                    <div class="ob-section-title">🔒 Sensitivity Level</div>
+                    <div class="sensitivity-cards" id="ob-sensitivity-cards">
+                        <div class="sensitivity-card selected" data-value="strict" onclick="selectSensitivity(this)">
+                            <div class="sensitivity-card-icon">🔴</div>
+                            <div class="sensitivity-card-title">Strict</div>
+                            <div class="sensitivity-card-desc">Avoid even trace amounts. Maximum safety.</div>
+                        </div>
+                        <div class="sensitivity-card" data-value="moderate" onclick="selectSensitivity(this)">
+                            <div class="sensitivity-card-icon">🟡</div>
+                            <div class="sensitivity-card-title">Moderate</div>
+                            <div class="sensitivity-card-desc">Standard detection. Flags definite and likely.</div>
+                        </div>
+                        <div class="sensitivity-card" data-value="mild" onclick="selectSensitivity(this)">
+                            <div class="sensitivity-card-icon">🟢</div>
+                            <div class="sensitivity-card-title">Mild</div>
+                            <div class="sensitivity-card-desc">Relaxed. Only flags definite matches.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ob-section">
+                    <div class="ob-section-title">🔔 Alert Style</div>
+                    <div class="ob-chip-grid">
+                        <button class="ob-chip active" data-alert="strict_warning" onclick="selectAlert(this)">🚨 Strict
+                            Warning</button>
+                        <button class="ob-chip" data-alert="soft_suggestion" onclick="selectAlert(this)">💡 Soft
+                            Suggestion</button>
+                    </div>
+                </div>
+                <div class="ob-section">
+                    <div class="ob-section-title">🥗 Dietary Preferences</div>
+                    <div class="ob-chip-grid" id="ob-diet-chips"></div>
+                </div>
+            </div>
+            <div class="onboarding-step" id="ob-step-3">
+                <div class="step-header">
+                    <h2>🏥 Medical & Emergency <span style="opacity:0.4;font-size:16px">(Optional)</span></h2>
+                    <p>Helps the AI give condition-specific warnings. Stored locally only.</p>
+                </div>
+                <div class="ob-section">
+                    <div class="ob-section-title">⚕️ Known Conditions</div>
+                    <div class="ob-chip-grid" id="ob-medical-chips"></div>
+                </div>
+                <div class="ob-section">
+                    <div class="ob-section-title">🆘 Emergency Contact</div>
+                    <div class="emergency-grid">
+                        <input type="text" class="ob-input" id="ob-emergency-name" placeholder="Contact name" />
+                        <input type="text" class="ob-input" id="ob-emergency-phone" placeholder="Phone number" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="onboarding-footer">
+            <button class="ob-btn-back" id="ob-btn-back" onclick="onboardingPrev()" style="visibility:hidden">←
+                Back</button>
+            <button class="ob-btn-skip" onclick="finishOnboarding()">Skip for now</button>
+            <button class="ob-btn-next" id="ob-btn-next" onclick="onboardingNext()">Continue →</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+     MAIN APP (Apple-Inspired Dynamic Design)
+     ══════════════════════════════════════════════════════════ -->
+
+    <!-- Sticky Navbar -->
+    <nav class="sg-nav" id="sg-nav" style="display:none">
+        <div class="sg-nav-inner">
+            <a class="sg-nav-brand" href="#">🛡️ AAHAR-AI</a>
+            <div class="sg-nav-links">
+                <a href="#hero" class="sg-nav-link">Home</a>
+                <a href="#scanner" class="sg-nav-link">Scanner</a>
+                <a href="#how-it-works" class="sg-nav-link">How It Works</a>
+                <a href="#facts" class="sg-nav-link">Learn</a>
+                <a href="#team" class="sg-nav-link">Team</a>
+            </div>
+            <div class="sg-nav-right">
+                <span class="sg-nav-user" id="nav-user" onclick="openProfileModal()"></span>
+                <button class="sg-nav-profile-btn" onclick="openProfileModal()">⚙️</button>
+                <button class="sg-nav-logout" onclick="logoutUser()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO SECTION ═══ -->
+    <section class="sg-hero" id="hero">
+        <div class="sg-hero-bg">
+            <div class="sg-hero-orb sg-hero-orb-1"></div>
+            <div class="sg-hero-orb sg-hero-orb-2"></div>
+            <div class="sg-hero-orb sg-hero-orb-3"></div>
+        </div>
+        <div class="sg-hero-content" data-animate="fade-up">
+            <div class="sg-hero-badge">🔬 AI-Powered Allergen Detection</div>
+            <h1 class="sg-hero-title">
+                Know what's<br>
+                <span class="sg-gradient-text">in your food.</span>
+            </h1>
+            <p class="sg-hero-subtitle">
+                Scan. Analyze. Stay safe. AAHAR-AI uses advanced AI to detect allergens instantly — personalized to your
+                exact health profile.
+            </p>
+            <div class="sg-hero-actions">
+                <a href="#scanner" class="sg-btn sg-btn-primary">Start Scanning →</a>
+                <a href="#how-it-works" class="sg-btn sg-btn-ghost">Learn More</a>
+            </div>
+            <div class="sg-hero-stats">
+                <div class="sg-stat" data-animate="fade-up" data-delay="200">
+                    <span class="sg-stat-num">9+</span>
+                    <span class="sg-stat-label">Allergens Detected</span>
+                </div>
+                <div class="sg-stat" data-animate="fade-up" data-delay="400">
+                    <span class="sg-stat-num">AI</span>
+                    <span class="sg-stat-label">Gemini Powered</span>
+                </div>
+                <div class="sg-stat" data-animate="fade-up" data-delay="600">
+                    <span class="sg-stat-num">0.9s</span>
+                    <span class="sg-stat-label">Avg Detection</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="sg-section sg-section-dark" id="how-it-works">
+        <div class="sg-container">
+            <div class="sg-section-header" data-animate="fade-up">
+                <div class="sg-section-tag">How It Works</div>
+                <h2 class="sg-section-title">Three steps.<br><span class="sg-gradient-text">Total peace of mind.</span>
+                </h2>
+            </div>
+            <div class="sg-steps">
+                <div class="sg-step-card" data-animate="fade-up" data-delay="100">
+                    <div class="sg-step-number">01</div>
+                    <div class="sg-step-icon">📸</div>
+                    <h3>Grab & Scan</h3>
+                    <p>Point your camera at any food label, barcode, or ingredient list. Our OCR reads it instantly.</p>
+                </div>
+                <div class="sg-step-card" data-animate="fade-up" data-delay="300">
+                    <div class="sg-step-number">02</div>
+                    <div class="sg-step-icon">🧠</div>
+                    <h3>AI Analyzes</h3>
+                    <p>Gemini AI cross-references ingredients against your unique allergy profile with severity-weighted
+                        risk scoring.</p>
+                </div>
+                <div class="sg-step-card" data-animate="fade-up" data-delay="500">
+                    <div class="sg-step-number">03</div>
+                    <div class="sg-step-icon">✅</div>
+                    <h3>Get Results</h3>
+                    <p>Instant personalized verdict — safe, caution, or danger — with risk percentages, dietary flags,
+                        and voice readout.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCANNER SECTION ═══ -->
+    <section class="sg-section sg-section-scanner" id="scanner">
+        <div class="sg-container">
+            <div class="sg-section-header" data-animate="fade-up">
+                <div class="sg-section-tag">The Scanner</div>
+                <h2 class="sg-section-title">Scan it.<br><span class="sg-gradient-text">Know it.</span></h2>
+            </div>
+
+            <!-- Mode Toggle -->
+            <div class="sg-mode-tabs" data-animate="fade-up">
+                <button class="sg-mode-tab active" data-mode="product" onclick="switchMode('product')">
+                    📦 Product Image
+                </button>
+                <button class="sg-mode-tab" data-mode="ocr" onclick="switchMode('ocr')">
+                    🏷️ Read Ingredients
+                </button>
+                <button class="sg-mode-tab" data-mode="text" onclick="switchMode('text')">
+                    ⌨️ Type It
+                </button>
+            </div>
+
+            <!-- Scanner Card -->
+            <div class="sg-scanner-card" data-animate="fade-up">
+                <p class="sg-scanner-instruction" id="scan-instruction">Take a photo of the product or its packaging —
+                    our AI will identify it instantly!</p>
+
+                <div class="sg-camera-area">
+                    <video id="video" width="600" height="400"></video>
+                    <canvas id="canvas" width="570" height="400" style="display:none"></canvas>
+                    <img id="output-image" style="display:none" />
+                    <div class="sg-camera-overlay">
+                        <div class="sg-camera-corner sg-corner-tl"></div>
+                        <div class="sg-camera-corner sg-corner-tr"></div>
+                        <div class="sg-camera-corner sg-corner-bl"></div>
+                        <div class="sg-camera-corner sg-corner-br"></div>
+                    </div>
+                </div>
+
+                <div class="sg-camera-buttons" id="camera-buttons">
+                    <button id="start-btn" class="sg-btn sg-btn-primary sg-btn-lg">▶ Start Camera</button>
+                    <button id="capture-btn" class="sg-btn sg-btn-capture" style="display:none">⬤ Capture</button>
+                </div>
+
+                <!-- Image Upload (for product & OCR modes) -->
+                <div class="sg-upload-area" id="upload-section">
+                    <div class="sg-upload-divider">
+                        <span class="sg-upload-divider-line"></span>
+                        <span class="sg-upload-divider-text">or upload an image</span>
+                        <span class="sg-upload-divider-line"></span>
+                    </div>
+                    <label class="sg-upload-btn" for="image-upload-input">
+                        📁 Upload Image from Device
+                        <input type="file" id="image-upload-input" accept="image/*" style="display:none"
+                            onchange="handleImageUpload(event)" />
+                    </label>
+                    <p class="sg-upload-hint">Upload a clear photo of the product or ingredient label for best results
+                    </p>
+                    <div class="sg-upload-preview" id="upload-preview" style="display:none">
+                        <img id="upload-preview-img" alt="Uploaded preview" />
+                        <div class="sg-upload-actions">
+                            <button class="sg-btn sg-btn-analyze" onclick="analyzeUploadedImage()">
+                                🔬 Analyze Image
+                            </button>
+                            <button class="sg-upload-remove" onclick="clearUploadPreview()">✕ Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Input (for text mode) -->
+                <div class="sg-text-input-area" id="text-input-section">
+                    <textarea id="ingredient-textarea" class="sg-textarea"
+                        placeholder="Paste or type your ingredient list here...&#10;&#10;Example: Wheat flour, sugar, palm oil, whey powder, soy lecithin, salt, natural flavors"></textarea>
+                    <button class="sg-btn sg-btn-primary sg-btn-lg"
+                        onclick="analyzeIngredientText(document.getElementById('ingredient-textarea').value)">
+                        🔬 Analyze Ingredients
+                    </button>
+                </div>
+            </div>
+
+            <!-- NLP Results -->
+            <div id="nlp-results"></div>
+        </div>
+    </section>
+
+    <!-- ═══ RISK FORMULA ═══ -->
+    <section class="sg-section sg-section-formula" id="formula">
+        <div class="sg-container">
+            <div class="sg-section-header" data-animate="fade-up">
+                <div class="sg-section-tag">Under The Hood</div>
+                <h2 class="sg-section-title">Precision<br><span class="sg-gradient-text">risk scoring.</span></h2>
+            </div>
+            <div class="sg-formula-card" data-animate="fade-up">
+                <div class="sg-formula-equation">
+                    Risk = <span class="sg-formula-var">Confidence</span> × <span class="sg-formula-var">Severity
+                        Weight</span>
+                </div>
+                <div class="sg-formula-examples">
+                    <div class="sg-formula-example">
+                        <div class="sg-formula-scenario">Milk detected → User severity: <strong>High (1.0)</strong>
+                        </div>
+                        <div class="sg-formula-calc">0.9 × 1.0 = <span class="sg-risk-high">90% RISK</span></div>
+                    </div>
+                    <div class="sg-formula-example">
+                        <div class="sg-formula-scenario">Soy traces → User severity: <strong>Low (0.3)</strong></div>
+                        <div class="sg-formula-calc">0.4 × 0.3 = <span class="sg-risk-low">12% RISK</span></div>
+                    </div>
+                </div>
+                <div class="sg-severity-table">
+                    <div class="sg-sev-item sg-sev-high"><span>High</span><span>1.0</span></div>
+                    <div class="sg-sev-item sg-sev-med"><span>Medium</span><span>0.6</span></div>
+                    <div class="sg-sev-item sg-sev-low"><span>Low</span><span>0.3</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DID YOU KNOW ═══ -->
+    <section class="sg-section sg-section-dark" id="facts">
+        <div class="sg-container">
+            <div class="sg-section-header" data-animate="fade-up">
+                <div class="sg-section-tag">Learn</div>
+                <h2 class="sg-section-title">Did you<br><span class="sg-gradient-text">know?</span></h2>
+            </div>
+            <div class="sg-facts-grid">
+                <div class="sg-fact-card" data-animate="fade-up" data-delay="100">
+                    <div class="sg-fact-icon">🔬</div>
+                    <h3>The Big Eight</h3>
+                    <p>Eight major allergens — milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, and soybeans —
+                        account for 90% of food allergic reactions in the U.S.</p>
+                </div>
+                <div class="sg-fact-card" data-animate="fade-up" data-delay="200">
+                    <div class="sg-fact-icon">⚡</div>
+                    <h3>Allergies vs Intolerances</h3>
+                    <p>Food allergies trigger the immune system and can be life-threatening. Intolerances affect
+                        digestion and cause discomfort but aren't usually dangerous.</p>
+                </div>
+                <div class="sg-fact-card" data-animate="fade-up" data-delay="300">
+                    <div class="sg-fact-icon">🌱</div>
+                    <h3>Outgrowing Allergies</h3>
+                    <p>Many children outgrow allergies to milk, eggs, wheat, and soy. But peanut, tree nut, fish, and
+                        shellfish allergies tend to be lifelong.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TEAM ═══ -->
+    <section class="sg-section" id="team">
+        <div class="sg-container">
+            <div class="sg-section-header" data-animate="fade-up">
+                <div class="sg-section-tag">Our Team</div>
+                <h2 class="sg-section-title">Built by<br><span class="sg-gradient-text">passionate people.</span></h2>
+            </div>
+            <div class="sg-team-grid">
+                <div class="sg-team-card" data-animate="fade-up" data-delay="100">
+                    <img src="assets/imgs/aditya.jpeg" alt="Aditya" class="sg-team-img" />
+                    <h4>Aditya Pawar</h4>
+                    <a href="https://www.linkedin.com/in/adityapawar393/" target="_blank" class="sg-team-link">LinkedIn
+                        →</a>
+                </div>
+                <div class="sg-team-card" data-animate="fade-up" data-delay="300">
+                    <img src="assets/imgs/ujjwal.jpeg" alt="Ujjwal" class="sg-team-img" />
+                    <h4>Ujjwal Pingle</h4>
+                    <a href="https://www.linkedin.com/in/ujjwal-pingle-730a69246/" target="_blank"
+                        class="sg-team-link">LinkedIn
+                        →</a>
+                </div>
+                <div class="sg-team-card" data-animate="fade-up" data-delay="200">
+                    <img src="assets/imgs/diksha.jpeg" alt="Diksha" class="sg-team-img" />
+                    <h4>Diksha More</h4>
+                    <a href="https://www.linkedin.com/in/diksha-more-602527257/" target="_blank"
+                        class="sg-team-link">LinkedIn
+                        →</a>
+                </div>
+                <div class="sg-team-card" data-animate="fade-up" data-delay="400">
+                    <img src="assets/imgs/aryan.jpeg" alt="Aryan" class="sg-team-img" />
+                    <h4>Aryan Mule</h4>
+                    <a href="https://www.linkedin.com/in/aryan-mule-759428258/" target="_blank"
+                        class="sg-team-link">LinkedIn →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="sg-footer">
+        <div class="sg-container">
+            <div class="sg-footer-brand" id="footer-brand" onclick="handleFooterBrandClick()">🛡️ AAHAR-AI</div>
+            <p class="sg-footer-text">AI-based Allergen Assessment, Health Analysis and Recommendation System —
+                personalized to keep you safe.</p>
+            <p class="sg-footer-copy">© 2025 AAHAR-AI. Your data stays on your device.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="profile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="nlp_analyzer.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
